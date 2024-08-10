@@ -1,36 +1,67 @@
 // src/components/Login.tsx
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './loginForm.module.css';
-interface FormData {
-	email: string;
-}
 
-const Login: React.FC = () => {
-	const [formData, setFormData] = useState<FormData>({ email: '' });
+const LoginForm = () => {
+  const [username, setUsername] = useState('');
+  const [error, setError] = useState('');
+  const router = useRouter();
 
-	return (
-		<div className={styles.loginContainer}>
-			<h4 className='pb-4'>Sign in</h4>
-			<form>
-				<div className={styles.formGroup}>
-					
-					<input
-						type="email"
-						id="email"
-						name="email"
-						value={formData.email}
-						placeholder='Username'
-						required
-					/>
-					<button
-						className={styles.loginButton}
-						type="submit"
-					>Sign In</button>
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError('');
 
-				</div>
-			</form>
-		</div>
-	);
+    try {
+      // const res = await fetch('/api/login', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({ username }),
+      // });
+
+      // if (!res.ok) {
+      //   throw new Error('Login failed');
+      // }
+
+      // const { accesstoken } = await res.json();
+
+      // Store the token in local storage
+      localStorage.setItem('accesstoken', username);
+
+      // Redirect to the desired page upon successful login
+      router.push('/login'); // Adjust this route as needed
+    } catch (err) {
+      setError('Invalid username');
+    }
+  };
+
+  return (
+    <div className={styles.loginContainer}>
+      <h4 className="pb-4">Sign in</h4>
+      <form onSubmit={handleSubmit}>
+        <div className={styles.formGroup}>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <button
+            className={styles.loginButton}
+            type="submit"
+          >
+            Sign In
+          </button>
+        </div>
+        {error && <p className="error">{error}</p>}
+      </form>
+    </div>
+  );
 };
 
-export default Login;
+export default LoginForm;

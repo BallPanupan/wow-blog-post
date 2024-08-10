@@ -38,6 +38,8 @@ export default function LoginPage() {
       setError('Login failed. Please try again.');
     }
   };
+
+
   return (
     <div className={styles.loginContainer}>
       <div className={styles.signForm}>
