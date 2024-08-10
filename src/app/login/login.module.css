@@ -48,11 +48,11 @@
 }
 
 /* Mobile Styles (up to 414px) */
-@media (max-width: 667px) {
+@media (max-width: 763px) {
 	.loginContainer {
 		justify-content: flex-end;
 		flex-direction: column-reverse;
-		height: 100%;
+		height: unset
 	}
 
 	.loginBoardSide {

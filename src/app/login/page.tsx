@@ -42,6 +42,7 @@ export default function LoginPage() {
 
   return (
     <div className={styles.loginContainer}>
+      
       <div className={styles.signForm}>
         <Login />
       </div>
