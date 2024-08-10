@@ -1,0 +1,47 @@
+.loginContainer {
+	background-color: #243831;
+	color: white;
+	height: 100vh;
+	display: flex;
+	justify-content: flex-end;
+	gap: 100px;
+}
+
+.signForm {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	font-size: 28px;
+	width: 100%;
+}
+
+
+.loginBoardSide {
+	width: 1000px;
+	background-color: #2B5F44;
+	border-radius: 36px 0px 0px 36px ;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	font-size: 28px;
+}
+
+/* Mobile Styles (up to 768px) */
+@media (max-width: 1024px) {
+	.loginContainer {
+		justify-content: flex-end;
+		flex-direction: column-reverse;
+	}
+
+	.loginBoardSide {
+		width: 100%;
+		height: 600px;
+		border-radius: 0px 0px 36px 36px;
+	}
+
+	.signForm {
+
+	}
+}
