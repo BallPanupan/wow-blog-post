@@ -4,7 +4,7 @@
 	height: 100vh;
 	display: flex;
 	justify-content: flex-end;
-	gap: 100px;
+	gap: 50px;
 }
 
 .signForm {
@@ -26,9 +26,10 @@
 	justify-content: center;
 	flex-direction: column;
 	font-size: 28px;
+	padding: 20px;
 }
 
-/* Mobile Styles (up to 768px) */
+/* Mobile Styles (up to 1024px) */
 @media (max-width: 1024px) {
 	.loginContainer {
 		justify-content: flex-end;
@@ -37,7 +38,26 @@
 
 	.loginBoardSide {
 		width: 100%;
-		height: 600px;
+		height: unset;
+		border-radius: 0px 0px 36px 36px;
+	}
+
+	.signForm {
+
+	}
+}
+
+/* Mobile Styles (up to 414px) */
+@media (max-width: 667px) {
+	.loginContainer {
+		justify-content: flex-end;
+		flex-direction: column-reverse;
+		height: 100%;
+	}
+
+	.loginBoardSide {
+		width: 100%;
+		height: unset;
 		border-radius: 0px 0px 36px 36px;
 	}
 

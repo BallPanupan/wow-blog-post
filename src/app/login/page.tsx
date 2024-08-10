@@ -4,6 +4,7 @@ import { useState } from 'react';
 import LoginLayout from './layout';
 import styles from './login.module.css';
 import Image from 'next/image';
+import Login from '@/components/Login/Login';
 
 
 export default function LoginPage() {
@@ -37,30 +38,10 @@ export default function LoginPage() {
       setError('Login failed. Please try again.');
     }
   };
-
-  // return (
-  //   <div className=''>
-  //     <h1>Login</h1>
-  //     {error && <p className=''>{error}</p>}
-  //     <form onSubmit={handleSubmit} className=''>
-  //       <label htmlFor="email">Email</label>
-  //       <input
-  //         type="email"
-  //         id="email"
-  //         value={email}
-  //         onChange={(e) => setEmail(e.target.value)}
-  //         required
-  //       />
-  //       <label htmlFor="password">Password</label>
-  //       <button type="submit">Login</button>
-  //     </form>
-  //   </div>
-  // );
-
   return (
     <div className={styles.loginContainer}>
       <div className={styles.signForm}>
-        sign Form
+        <Login />
       </div>
 
       <div className={styles.loginBoardSide}>
