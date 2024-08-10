@@ -1,0 +1,12 @@
+.navbarBGColor {
+	background-color: #243831;
+}
+
+.navbarBGColor button {
+	background-color: #ffffff00;
+	border: 0px;
+}
+
+.navbarWidth {
+	max-width: 320px;
+}

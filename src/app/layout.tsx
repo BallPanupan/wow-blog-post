@@ -1,27 +1,27 @@
+"use client";
 // app/layout.tsx
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HeaderLayout from '@/components/HeaderLayout';
-import Footer from '@/components/Footer';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 // import '../styles/globals.css';
-import { ReactNode } from 'react';
+import { Inter } from 'next/font/google';
+import { useEffect } from 'react';
 
-export const metadata = {
-  title: 'My Next.js App',
-  description: 'A sample Next.js application',
-};
+const inter = Inter({ subsets: ['latin'] });
 
-interface RootLayoutProps {
-  children: ReactNode;
-}
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  
+  useEffect(() => {
+    // Ensure Bootstrap JS is loaded on the client-side only
+    require('bootstrap/dist/js/bootstrap.bundle.min.js');
+  }, []);
 
-export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>
-        {/* <HeaderLayout /> */}
+      <body className={inter.className}>
         {children}
-        {/* <Footer /> */}
       </body>
+
     </html>
   );
 }
