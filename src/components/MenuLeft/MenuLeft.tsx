@@ -10,7 +10,7 @@ const MenuLeft: React.FC = () => {
 	const searchParams = useSearchParams(); // Returns the current query parameters
 
 	const currentUrl = `${pathname}${searchParams.toString() ? '?' + searchParams.toString() : ''}`;
-	console.log(currentUrl);
+	// console.log(currentUrl);
 
 	const btnActive = {
 		'home': currentUrl === '/' ? styles.active : '',

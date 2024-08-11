@@ -13,7 +13,7 @@
   height: 50px;
   border-radius: 50%;
 	background-color: white;
-	margin-right: 10px;
+	margin: 20px 20px;
 }
 
 .tags {
@@ -29,6 +29,21 @@
 	border-radius: 8px;
 	width: 150px;
 	height: 40px;
+}
+
+.postCommentsBtn {
+	color: #ffffff;
+	background-color: #49A569;
+	border: unset;
+	border-radius: 8px;
+	width: 150px;
+	height: 40px;
+}
+
+.commentControl {
+	height: 100px;
+	width: 100%;
+	border-radius: 8px;
 }
 
 @media (max-width: 768px) {

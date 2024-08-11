@@ -5,10 +5,56 @@ import Navbar from "@/components/Navbar/Navbar";
 import MenuLeft from "@/components/MenuLeft/MenuLeft";
 import Image from "next/image";
 import Link from "next/link";
-import Post from "@/components/PostList/Post";
 import Comment from "@/components/Comment/Comment";
+import { useState } from "react";
 
 export default function post() {
+
+  const [addCommentStatus, setAddCommentStatus] = useState<boolean | false>(true);
+  
+  console.log('addCommentStatus', addCommentStatus);
+
+  const handleClick = () => {
+    setAddCommentStatus(!addCommentStatus); // Toggle the status
+  };
+
+  const AddCommentBtn = (): React.ReactNode => {
+    return (
+      <div className="mt-5 mb-5">
+        <button
+          className={styles.addCommentsBtn}
+          onClick={handleClick}
+        >
+          Add Comments
+        </button>
+      </div>
+    );
+  };
+
+  const TextComment = () => {
+    return (
+      <div className="mt-5 mb-5">
+        <textarea
+          className={`${styles.commentControl}`}
+          placeholder="What’s on your mind..."
+        ></textarea>
+        <div className="d-flex justify-content-end gap-2">
+          <button
+            className={styles.addCommentsBtn}
+            onClick={handleClick}
+          >
+            Cancel
+          </button>
+          <button
+            className={styles.postCommentsBtn}
+            onClick={handleClick}
+          >
+            Post
+          </button>
+        </div>
+      </div>
+    )
+  }
 
 
   return (
@@ -36,7 +82,7 @@ export default function post() {
                   />
                 </Link>
 
-                <div className={`flex-column mb-4`}>
+                <div className={`flex-column`}>
                   <div className='d-flex gap-2 justify-content-between'>
                     <div className='d-flex align-items-center gap-2'>
                       <div className={`${styles.avatar}`}>
@@ -86,9 +132,10 @@ export default function post() {
                   </div>
                 </div>
 
-                <div className="pb-4">
-                  <button className={`${styles.addCommentsBtn}`}>Add Comments</button>
-                </div>
+
+                { !addCommentStatus ? <AddCommentBtn /> : <TextComment /> }
+
+
                 {/* commment component */}
                 <Comment />
                 <Comment />
