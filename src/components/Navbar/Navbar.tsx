@@ -14,7 +14,7 @@ const Navbar: React.FC = () => {
 
   const btnActive = {
     'home': currentUrl === '/' ? 'active' : '',
-    'ourBlog': currentUrl === '/ourBlog' ? 'active' : '',
+    'ourBlog': currentUrl === '/post' ? 'active' : '',
   }
 
   return (

@@ -14,7 +14,7 @@ const MenuLeft: React.FC = () => {
 
 	const btnActive = {
 		'home': currentUrl === '/' ? styles.active : '',
-		'ourBlog': currentUrl === '/ourBlog' ? styles.active : '',
+		'ourBlog': currentUrl === '/post' ? styles.active : '',
 	}
 
 	return (
