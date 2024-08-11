@@ -57,11 +57,11 @@ const Navbar: React.FC = () => {
           <div className="offcanvas-body">
             <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li>
-                <Link className="nav-link active d-flex" aria-current="page" href="/login">
+                <Link className="nav-link active d-flex navSignIn" aria-current="page" href="/login">
                   Sign In
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className={`nav-item ${styles.desktop}`}>
                 <Link className={`nav-link d-flex gap-2 ${btnActive.home}`} aria-current="page" href="/">
                   <Image 
                     src={'./icon/home-line.svg'} 
@@ -72,7 +72,7 @@ const Navbar: React.FC = () => {
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className={`nav-item ${styles.desktop}`}>
                 <Link className={`nav-link d-flex gap-2 ${btnActive.ourBlog}`} href="#">
                   <Image 
                     src={'./icon/edit-05.svg'} 
