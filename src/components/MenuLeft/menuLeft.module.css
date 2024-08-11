@@ -1,0 +1,17 @@
+.icon {
+	filter: brightness(0) invert(0)
+}
+
+.svgIconHome {
+	filter: brightness(0) saturate(100%);
+	/* filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%); */
+}
+
+.svgIconEdit {
+	filter: brightness(0) saturate(100%);
+	/* filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%); */
+}
+
+.active {
+	font-weight: bold;
+}
