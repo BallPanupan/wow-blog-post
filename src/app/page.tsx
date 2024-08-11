@@ -16,8 +16,21 @@ export default function Home() {
   return (
     <div>
       <Navbar />
+
+      <div className="pt-5 mt-5">
       <h1>Welcome to My Blog</h1>
       <p>Home Page: Explore our latest posts and updates.</p>
+
+        <div className="container">
+          <div className="row align-items-start justify-content-center">
+            <div className="col-2">.col-9</div>
+            <div className="col-6">.col-4 Since 9 + 4 = 13 &gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.</div>
+            <div className="col-2">.col-6 Subsequent columns continue along the new line.</div>
+          </div>
+        </div>
+
+      </div>
+      
     </div>
   )
 
