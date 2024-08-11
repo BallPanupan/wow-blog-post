@@ -6,3 +6,48 @@ body {
   background-color: #49A569;
   color: #ffffff;
 }
+
+.btn-success {
+  color: #49A569;
+	background-color: #ffffff;
+	border: 1px solid #49A569;
+	border-radius: 8px;
+	height: 40px;
+  min-width: 100px;
+}
+
+.btn-success-dark {
+  color: #ffffff;
+  background-color: #49A569;
+  border: unset;
+  border-radius: 8px;
+  width: 150px;
+  height: 40px;
+}
+
+.textareaControl {
+  height: 150px;
+  width: 100%;
+  border-radius: 8px;
+  padding: 15px;
+  border: 1px solid #DADADA;
+}
+
+.inputControl {
+  border: 1px solid #DADADA;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.f-post {
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 991px) {
+  button.btn {
+    width: 100%;
+  }
+}

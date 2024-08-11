@@ -27,7 +27,7 @@ export default function Home() {
 
             <div className={`col-2 ${styles.offcanvasBody}`}><MenuLeft /></div>
 
-            <div className={`col-8 pt-5 ${styles.mainContent}`}>
+            <div className={`col-8 pt-5 mb-5 ${styles.mainContent}`}>
               <SearchBar />
 
               <div className={styles.listPosts}>

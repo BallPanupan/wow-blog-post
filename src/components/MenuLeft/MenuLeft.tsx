@@ -14,7 +14,7 @@ const MenuLeft: React.FC = () => {
 
 	const btnActive = {
 		'home': currentUrl === '/' ? styles.active : '',
-		'ourBlog': currentUrl === '/post' ? styles.active : '',
+		'ourBlog': currentUrl === '/ourBlog' ? styles.active : '',
 	}
 
 	return (
@@ -33,7 +33,7 @@ const MenuLeft: React.FC = () => {
 					</Link>
 				</li>
 				<li className={`nav-item ${styles.desktop}`}>
-					<Link className={`nav-link d-flex gap-2 ${btnActive.ourBlog}`} href="#">
+					<Link className={`nav-link d-flex gap-2 ${btnActive.ourBlog}`} href="/ourBlog">
 						<Image
 							src={'./icon/edit-05.svg'}
 							alt='Home'
@@ -41,7 +41,7 @@ const MenuLeft: React.FC = () => {
 							height={24}
 							className={styles.svgIconEdit}
 						/>
-						Our Blog, my post
+						Our Blog
 					</Link>
 				</li>
 			</ul>
