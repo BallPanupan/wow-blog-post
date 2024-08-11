@@ -6,6 +6,7 @@ import MenuLeft from "@/components/MenuLeft/MenuLeft";
 import Image from "next/image";
 import Link from "next/link";
 import Post from "@/components/PostList/Post";
+import Comment from "@/components/Comment/Comment";
 
 export default function post() {
 
@@ -85,16 +86,22 @@ export default function post() {
                   </div>
                 </div>
 
-                <button className={`${styles.addCommentsBtn}`}>Add Comments</button>
+                <div className="pb-4">
+                  <button className={`${styles.addCommentsBtn}`}>Add Comments</button>
+                </div>
+                {/* commment component */}
+                <Comment />
+                <Comment />
+                <Comment />
+                <Comment />
+                <Comment />
+                <Comment />
 
               </div>
 
             </div>
 
             <div className={`col-2 ${styles.colRight}`}></div>
-
-            {/* commment component */}
-
 
           </div>
         </div>
