@@ -26,3 +26,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.topic {
+	color: black;
+	text-decoration: unset;
+}

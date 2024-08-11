@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import styles from "./post.module.css";
+import Link from 'next/link';
 
 export default function Post() {
 	return (
@@ -31,7 +32,9 @@ export default function Post() {
 				<div className={styles.tags}>History</div>
 			</div>
 		
-			<h4 className='fw-bold'>header: The Beginning og the end of the world</h4>
+			<Link href='/post' className={styles.topic}>
+				<h4 className='fw-bold'>header: The Beginning of the end of the world</h4>
+			</Link>
 			<p className={styles.postContent}>
 			The afterlife sitcom The Good Place comes to its culmination, the show’s 
 			two protagonists, Eleanor and Chidi, contemplate their future. Having 
