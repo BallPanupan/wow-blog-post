@@ -2,6 +2,9 @@
 	border: 1px solid #ffffff;
 	border-radius: 8px;
 	padding: 0px 10px;
+	width: 100%;
+	/* width: 500px; */
+	/* min-width: 500px; */
 }
 
 .formControl {

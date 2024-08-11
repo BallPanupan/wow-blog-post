@@ -4,8 +4,8 @@ import styles from "./searchBar.module.css";
 
 export default function SearchBar() {
 	return (
-		<div className='d-flex align-items-center p-2 flex-wrap justify-content-end gap-2'>
-			<div className={`input-group align-items-center ${styles.searchInput}`} style={{ maxWidth: '500px' }}>
+		<div className='d-flex align-items-center justify-content-end p-1 gap-1 mb-4'>
+			<div className={`input-group align-items-center ${styles.searchInput}`}>
 				<Image 
 					alt='search'
 					src={'./icon/search-md.svg'} 
@@ -21,7 +21,7 @@ export default function SearchBar() {
 			</div>
 			<div className="dropdown ms-3">
 				<button
-					className="btn btn-white dropdown-toggle"
+					className={`btn btn-white dropdown-toggle ${styles.buttonSearch}`}
 					type="button"
 					id="dropdownMenuButton"
 					data-bs-toggle="dropdown"
@@ -39,7 +39,7 @@ export default function SearchBar() {
 					<li><a className="dropdown-item" href="#">Others</a></li>
 				</ul>
 			</div>
-			<button className="btn bg-success ms-3">Create +</button>
+			<button className={`btn bg-success p-1 ${styles.create}`}>Create&nbsp;+</button>
 		</div>
 	);
 }

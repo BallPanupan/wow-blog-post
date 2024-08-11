@@ -7,6 +7,13 @@
   min-height: 100vh;
 }
 
+.listPosts {
+  border-radius: 15px;
+  position: relative;
+  background-color: white;
+}
+
+
 .description {
   display: inherit;
   justify-content: inherit;
@@ -233,4 +240,14 @@
 	.offcanvasBody {
 		display: none;
 	}
+
+  .colRight {
+    display: none;
+  }
+
+  .mainContent {
+    width: 100%;
+    padding: 20px;
+  }
+
 }

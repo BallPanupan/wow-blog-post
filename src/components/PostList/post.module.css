@@ -1,0 +1,28 @@
+.postContainer {
+	display: flex;
+	padding: 20px;
+	border-bottom: 1px solid #b0aeae;
+	position: relative;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+	background-color: white;
+	margin-right: 10px;
+}
+
+.tags {
+	border-radius: 16px;
+	background-color: #e2e2e2;
+	padding: 5px 15px;
+}
+
+.postContent {
+  height: 50px;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

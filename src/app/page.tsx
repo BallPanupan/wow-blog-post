@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import Navbar from "@/components/Navbar/Navbar";
 import MenuLeft from "@/components/MenuLeft/MenuLeft";
 import SearchBar from "@/components/SearchBar/SearchBar";
+import Post from "@/components/PostList/Post";
 
 export default function Home() {
 
@@ -26,9 +27,21 @@ export default function Home() {
 
             <div className={`col-2 ${styles.offcanvasBody}`}><MenuLeft /></div>
 
-            <div className="col-8">
+            <div className={`col-8 ${styles.mainContent}`}>
               <SearchBar />
+
+              <div className={styles.listPosts}>
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+              </div>
+
             </div>
+
+            <div className={`col-2 ${styles.colRight}`}></div>
+
 
           </div>
         </div>
