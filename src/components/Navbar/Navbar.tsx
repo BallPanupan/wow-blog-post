@@ -55,9 +55,11 @@ const Navbar: React.FC = () => {
             </button>
           </div>
           <div className="offcanvas-body">
-            <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <ul className="navbar-nav justify-content-end flex-grow-1 pe-3 gap-2">
               <li>
-                <Link className="nav-link active d-flex navSignIn" aria-current="page" href="/login">
+                <Link 
+                  className={`${styles.signIn}`} 
+                  aria-current="page" href="/login">
                   Sign In
                 </Link>
               </li>

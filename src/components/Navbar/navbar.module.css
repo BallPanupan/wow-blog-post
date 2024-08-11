@@ -15,8 +15,20 @@
 
 }
 
+.signIn {
+	color: #ffffff;
+	background-color: #49A569;
+	border: 1px solid #49A569;
+	border-radius: 8px;
+	padding: 9px 25px;
+	text-decoration: unset;
+}
+
+
 @media (min-width: 770px) {
 	.desktop {
 		display: none;
 	}
 }
+
+

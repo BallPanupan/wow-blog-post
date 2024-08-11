@@ -1,3 +1,8 @@
 body {
-  background-color: #D8E9E4;
+  background-color: #BBC2C0;
+}
+
+.bg-success {
+  background-color: #49A569;
+  color: #ffffff;
 }
