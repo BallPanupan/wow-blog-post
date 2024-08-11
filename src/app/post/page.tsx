@@ -10,7 +10,7 @@ import { useState } from "react";
 
 export default function post() {
 
-  const [addCommentStatus, setAddCommentStatus] = useState<boolean | false>(true);
+  const [addCommentStatus, setAddCommentStatus] = useState<boolean | false>(false);
   
   console.log('addCommentStatus', addCommentStatus);
 
