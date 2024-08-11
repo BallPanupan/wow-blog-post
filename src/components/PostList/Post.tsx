@@ -5,7 +5,6 @@ import styles from "./post.module.css";
 export default function Post() {
 	return (
 		<div className={`${styles.postContainer} flex-column`}>
-			
 			<div className='d-flex gap-2 justify-content-between'>
 				<div className='d-flex align-items-center gap-2'>
 					<div className={`${styles.avatar}`}>
@@ -42,7 +41,6 @@ export default function Post() {
 			is extinction. When you have had enough, when you are utterly sated by love and 
 			joy and pleasure, you can walk through a passage to nothingness. And Chidi has had enough.
 			</p>
-
 			<div className='d-flex align-items-center gap-2'>
 				<div>
 					<Image
@@ -54,7 +52,6 @@ export default function Post() {
 				</div>
 				<div>32 Comments</div>
 			</div>
-
 		</div>
 	);
 }

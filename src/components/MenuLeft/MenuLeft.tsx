@@ -19,7 +19,7 @@ const MenuLeft: React.FC = () => {
 
 	return (
 		<div className="offcanvas-body">
-			<ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+			<ul className="navbar-nav justify-content-end flex-grow-1 pe-3 pt-5">
 				<li className={`nav-item ${styles.desktop}`}>
 					<Link className={`nav-link d-flex gap-2 ${btnActive.home}`} aria-current="page" href="/">
 						<Image
