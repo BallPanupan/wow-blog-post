@@ -127,7 +127,7 @@ export default function Post({content}: any) {
 							height={50}
 						/>
 					</div>
-					<div>Jassica</div>
+					<div>{content?.user.username || ''}</div>
 				</div>
 
 
