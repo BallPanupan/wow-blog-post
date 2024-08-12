@@ -89,8 +89,7 @@ const ModalEditePost = ({ newPost, setNewPost, communityList, handleClick }: any
 	)
 }
 
-export default function Post() {
-
+export default function Post({content}: any) {
 	const [newPost, setNewPost] = useState({
 		title: '',
 		content: '',
@@ -159,20 +158,14 @@ export default function Post() {
 			</div>
 
 			<div className='d-flex gap-2 mb-2 mt-2'>
-				<div className={styles.tags}>History</div>
+				<div className={styles.tags}>{content?.community || ''}</div>
 			</div>
 
 			<Link href='/post' className={styles.topic}>
-				<h4 className='fw-bold'>header: The Beginning of the end of the world</h4>
+				<h4 className='fw-bold'>{content?.topic || ''}</h4>
 			</Link>
 			<p className={styles.postContent}>
-				The afterlife sitcom The Good Place comes to its culmination, the show’s
-				two protagonists, Eleanor and Chidi, contemplate their future. Having
-				lived thousands upon thousands of lifetimes together, and having experienced
-				virtually everything this life has to offer, they are weary. It is time for
-				it all to end. The show’s solution to this perpetual happiness-cum-weariness
-				is extinction. When you have had enough, when you are utterly sated by love and
-				joy and pleasure, you can walk through a passage to nothingness. And Chidi has had enough.
+				{content?.content || ''}
 			</p>
 			<div className='d-flex align-items-center gap-2'>
 				<div>

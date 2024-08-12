@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./page.module.css";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Navbar from "@/components/Navbar/Navbar";
 import MenuLeft from "@/components/MenuLeft/MenuLeft";
 import SearchBar from "@/components/SearchBar/SearchBar";
@@ -13,6 +13,7 @@ import checkSignIn from "@/common/checkSignIn";
 export default function Home() {
   const accessToken = localStorage.getItem('accesstoken') || null;
   const [profile, setProfile] = useState<any>(null); // Initialize with null or empty object
+  const [posts, setPosts] = useState<any>([]);
 
   useEffect(() => {
     const checkUserSignIn = async () => {
@@ -21,6 +22,47 @@ export default function Home() {
     }
     checkUserSignIn()
   }, [accessToken]);
+
+  const getAllPosts = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/post', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to fetch posts');
+      }
+      return await response.json();
+    } catch (err) {
+      console.error('Error fetching posts:', err);
+      return [];
+    }
+  };
+  
+
+  const fetchPosts = useCallback(async () => {
+    const posts = await getAllPosts();
+    setPosts(posts);
+    console.log(posts)
+  }, []);
+
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts]);
+
+  const ListPosts = () => {
+    return (
+      <>
+        {posts.map((content: any, index: any) => (
+          <Post key={index} content={content} />
+        ))}
+      </>
+    );
+  };
+
 
   return (
     <div>
@@ -37,11 +79,12 @@ export default function Home() {
               <SearchBar />
 
               <div className={styles.listPosts}>
+                { <ListPosts /> }
+                {/* <Post />
                 <Post />
                 <Post />
                 <Post />
-                <Post />
-                <Post />
+                <Post /> */}
               </div>
 
             </div>
