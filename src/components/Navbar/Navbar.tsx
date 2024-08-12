@@ -4,8 +4,8 @@ import styles from "./navbar.module.css";
 import Image from 'next/image';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-const Navbar: React.FC = () => {
-
+const Navbar: React.FC<any> = ({profile}: any) => {
+  // console.log('profile', profile);
   const pathname = usePathname(); // Returns the current path
   const searchParams = useSearchParams(); // Returns the current query parameters
 

@@ -1,7 +1,7 @@
 "use client";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../app/globals.css'; // Import your global CSS
+import '../app/globals.css';
 
 import { Inter } from 'next/font/google';
 import { useEffect } from 'react';

@@ -5,6 +5,7 @@ import styles from './loginForm.module.css';
 const LoginForm = ({username, setUsername, handleSubmit}: any) => {
   return (
     <div className={styles.loginContainer}>
+      <form>
       <h4 className="pb-4">Sign in</h4>
         <div className={styles.formGroup}>
           <input
@@ -24,6 +25,7 @@ const LoginForm = ({username, setUsername, handleSubmit}: any) => {
             Sign In
           </button>
         </div>
+        </form>
     </div>
   );
 };

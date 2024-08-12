@@ -1,24 +1,33 @@
 "use client";
 
 import styles from "./page.module.css";
-import { useRouter } from 'next/navigation';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar/Navbar";
 import MenuLeft from "@/components/MenuLeft/MenuLeft";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import Post from "@/components/PostList/Post";
+import { usePathname } from "next/navigation";
+import { useRouter } from 'next/navigation';
+import checkSignIn from "@/common/checkSignIn";
 
 export default function Home() {
-
   const router = useRouter();
+  const [profile, setProfile] = useState<any>(null); // Initialize with null or empty object
+  const pathname = usePathname()
 
   useEffect(() => {
-    router.push('/');
-  }, [])
+    // Fetch profile data if on the home page
+    if (pathname === '/') {
+      getProfile();
+    }
+  }, [pathname]);
 
+  const getProfile = async () => {
+    const accessToken = localStorage.getItem('accesstoken');
+  };
   return (
     <div>
-      <Navbar />
+      <Navbar profile={profile}/>
 
       <div className="pt-5">
 
