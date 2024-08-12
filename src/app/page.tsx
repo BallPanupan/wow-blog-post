@@ -11,11 +11,15 @@ import { useRouter } from 'next/navigation';
 import checkSignIn from "@/common/checkSignIn";
 
 export default function Home() {
-  const accessToken = localStorage.getItem('accesstoken') || null;
+  const [accessToken, setAccessToken] = useState<string | null>(null);
   const [profile, setProfile] = useState<any>(null); // Initialize with null or empty object
   const [posts, setPosts] = useState<any>([]);
 
   useEffect(() => {
+    const token = localStorage.getItem('accesstoken');
+    setAccessToken(token ? token : null);
+    
+    const accessToken = localStorage.getItem('accesstoken') ? localStorage.getItem('accesstoken') : null
     const checkUserSignIn = async () => {
       const isSignIn: any = await checkSignIn(accessToken);
       setProfile(isSignIn.data)

@@ -67,7 +67,7 @@ export default function SearchBar() {
 					{ 
 						communityList.length <= 0 ? null : communityList.map((name, index) => {
 							return (
-								<li>
+								<li key={index}>
 									<a
 										className="dropdown-item"
 										onClick={() => setSearchCommunityType(name)}
