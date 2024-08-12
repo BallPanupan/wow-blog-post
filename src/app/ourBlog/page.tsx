@@ -10,7 +10,7 @@ import checkSignIn from "@/common/checkSignIn";
 
 export default function OurBlog() {
   const accessToken = localStorage.getItem('accesstoken') || null;
-  const [profile, setProfile] = useState<any>(null); // Initialize with null or empty object
+  const [profile, setProfile] = useState<any>({}); // Initialize with null or empty object
 
   useEffect(() => {
     const checkUserSignIn = async () => {

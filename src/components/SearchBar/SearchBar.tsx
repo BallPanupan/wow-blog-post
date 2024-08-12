@@ -88,19 +88,12 @@ export default function SearchBar() {
 			<div className="modal fade align-content-center" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div className="modal-dialog d-flex ">
 					<div className="modal-content">
-
-
 						<div className="modal-header border-0">
-							
 							<h1 className="modal-title fs-5" id="exampleModalLabel">Create Post</h1>
-
 							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 
-
 						<div className="modal-body d-flex gap-2 flex-column">
-
-
 							<div className="dropdown">
 								<button
 									className={`btn btn-white dropdown-toggle btn-success f-post`}
