@@ -89,7 +89,7 @@ const ModalEditePost = ({newPost, setNewPost, communityList, handleClick}: any) 
 						</div>
 						<div className="modal-footer border-0">
 							<button type="button" className="btn btn-success ml-2" data-bs-dismiss="modal">Close</button>
-							<button type="button" className="btn btn-success-dark" data-bs-dismiss="modal" onClick={handleClick}>Save changes</button>
+							<button type="button" className="btn btn-success-dark" data-bs-dismiss="modal" onClick={handleClick}>Confirm</button>
 						</div>
 					</div>
 				</div>
