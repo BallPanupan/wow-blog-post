@@ -46,8 +46,30 @@ body {
   justify-content: space-between;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.normal-Btn {
+  background-color: #ffffff;
+  border: 1px solid #DADADA;
+  border-radius: 8px;
+  width: 150px;
+  height: 40px;
+}
+
+.delete-Btn {
+  background-color: #F23536;
+  border: 1px solid #DADADA;
+  color: #ffffff;
+  border-radius: 8px;
+  width: 150px;
+  height: 40px;
+}
+
 @media (max-width: 991px) {
   button.btn {
     width: 100%;
   }
 }
+

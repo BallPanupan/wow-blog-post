@@ -3,6 +3,29 @@ import React from 'react';
 import styles from "./post.module.css";
 import Link from 'next/link';
 
+const ModalDeletePost = () => {
+	return (
+		<>
+
+			<div className={`modal fade align-content-center`} id="deletePost" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div className="modal-dialog d-flex justify-content-center">
+					<div className={`modal-content ${styles.modalcontentDeletePost}`}>
+						<div className="modal-body d-flex gap-2 flex-column align-items-center">
+							<h6>Please confirm if you wish to delete the post</h6>
+							<p className='text-center'>Are you sure you want to delete the post? Once deleted, it cannot be recovered.</p>
+						</div>
+						<div className="modal-footer border-0">
+							<button type="button" className="normal-Btn ml-2" data-bs-dismiss="modal">Close</button>
+							<button type="button" className="delete-Btn" data-bs-dismiss="modal">Delete</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</>
+	)
+}
+
+
 export default function Post() {
 	return (
 		<div className={`${styles.postContainer} flex-column`}>
@@ -18,14 +41,30 @@ export default function Post() {
 					</div>
 					<div>Jassica</div>
 				</div>
-				<div>
-					<Image
-						src={'./icon/star.svg'}
-						alt='login board'
-						width={30}
-						height={30}
-					/>
+
+
+				<div className='d-flex flex-column align-items-end'>
+					<div className='d-flex gap-2 cursor-pointer'>
+						<Image
+							className='cursor-pointer'
+							src={'./icon/edit-03.svg'}
+							alt='login board'
+							width={30}
+							height={30}
+						/>
+						<Image
+							className='cursor-pointer'
+							src={'./icon/trash-01.svg'}
+							alt='login board'
+							width={30}
+							height={30}
+							data-bs-toggle="modal" 
+							data-bs-target="#deletePost"
+						/>
+					</div>
 				</div>
+
+
 			</div>
 
 			<div className='d-flex gap-2 mb-2 mt-2'>
@@ -55,6 +94,7 @@ export default function Post() {
 				</div>
 				<div>32 Comments</div>
 			</div>
+			<ModalDeletePost />
 		</div>
 	);
 }

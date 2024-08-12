@@ -1,20 +1,12 @@
 "use client";
 
 import styles from "./ourBlog.module.css";
-import { useRouter } from 'next/navigation';
-import { useEffect } from "react";
 import Navbar from "@/components/Navbar/Navbar";
 import MenuLeft from "@/components/MenuLeft/MenuLeft";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import Post from "@/components/PostList/Post";
 
 export default function OurBlog() {
-
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   router.push('/');
-  // }, [])
 
   return (
     <div>
@@ -31,9 +23,6 @@ export default function OurBlog() {
               <SearchBar />
 
               <div className={styles.listPosts}>
-                <Post />
-                <Post />
-                <Post />
                 <Post />
                 <Post />
               </div>

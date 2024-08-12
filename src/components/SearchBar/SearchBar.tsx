@@ -157,6 +157,8 @@ export default function SearchBar() {
 					</div>
 				</div>
 			</div>
+			{/* <!-- Modal --> */}
+
 
 		</div>
 	);
