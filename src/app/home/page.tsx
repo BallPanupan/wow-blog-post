@@ -14,12 +14,7 @@ const HomePage: React.FC = () => {
     router.push('/');
   }, [])
 
-  return (
-    <div>
-      <h1>Welcome to My Blog</h1>
-      <p>Home Page: Explore our latest posts and updates.</p>
-    </div>
-  );
+  return(<></>);
 };
 
 export default HomePage;

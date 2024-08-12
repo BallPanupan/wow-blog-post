@@ -1,50 +1,46 @@
 // app/login/page.tsx
 'use client'
 import { useState } from 'react';
-import LoginLayout from './layout';
 import styles from './login.module.css';
 import Image from 'next/image';
 import Login from '@/components/Login/Login';
-
+import { useRouter } from 'next/navigation';
+import { useEffect } from "react";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [error, setError] = useState<string | null>(null);
-
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-
-    // Basic client-side validation
-    if (!email) {
+  const handleSubmit = async () => {
+    if (!username) {
       setError('Please fill out both email.');
       return;
     }
-
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch('http://localhost:3001/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ username: username }),
       });
-
       if (!response.ok) {
         throw new Error('Login failed');
       }
-
-      // Redirect to another page on successful login
+      const data = await response.json()
+      localStorage.setItem('accesstoken', data.accessToken);
+      router.push('/');
     } catch (err) {
       setError('Login failed. Please try again.');
     }
   };
 
+  const router = useRouter();
 
   return (
     <div className={styles.loginContainer}>
       
       <div className={styles.signForm}>
-        <Login />
+        <Login username={username} setUsername={setUsername} handleSubmit={handleSubmit}/>
       </div>
 
       <div className={styles.loginBoardSide}>
