@@ -45,7 +45,7 @@ export default function Home() {
 
   const fetchPosts = useCallback(async () => {
     const posts = await getAllPosts();
-    setPosts(posts);
+    setPosts(posts.reverse());
     console.log(posts)
   }, []);
 
@@ -80,11 +80,6 @@ export default function Home() {
 
               <div className={styles.listPosts}>
                 { <ListPosts /> }
-                {/* <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post /> */}
               </div>
 
             </div>

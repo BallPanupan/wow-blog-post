@@ -10,7 +10,7 @@ const Navbar: React.FC<any> = ({profile, setProfile}: any) => {
   const currentUrl = `${pathname}${searchParams.toString() ? '?' + searchParams.toString() : ''}`;
   const btnActive = {
     'home': currentUrl === '/' ? 'active' : '',
-    'ourBlog': currentUrl === '/post' ? 'active' : '',
+    'ourBlog': currentUrl === '/ourBlog' ? 'active' : '',
   }
 
   const handleSignOut = async () => {
@@ -97,14 +97,14 @@ const Navbar: React.FC<any> = ({profile, setProfile}: any) => {
                 </Link>
               </li>
               <li className={`nav-item ${styles.desktop}`}>
-                <Link className={`nav-link d-flex gap-2 ${btnActive.ourBlog}`} href="#">
+                <Link className={`nav-link d-flex gap-2 ${btnActive.ourBlog}`} href="/ourBlog">
                   <Image 
                     src={'./icon/edit-05.svg'} 
                     alt='Home'
                     width={24}
                     height={24}
                   />
-                  Our Blog, my post
+                  Our Blog
                 </Link>
               </li>
             </ul>
