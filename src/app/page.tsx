@@ -11,23 +11,20 @@ import { useRouter } from 'next/navigation';
 import checkSignIn from "@/common/checkSignIn";
 
 export default function Home() {
-  const router = useRouter();
+  const accessToken = localStorage.getItem('accesstoken') || null;
   const [profile, setProfile] = useState<any>(null); // Initialize with null or empty object
-  const pathname = usePathname()
 
   useEffect(() => {
-    // Fetch profile data if on the home page
-    if (pathname === '/') {
-      getProfile();
+    const checkUserSignIn = async () => {
+      const isSignIn: any = await checkSignIn(accessToken);
+      setProfile(isSignIn.data)
     }
-  }, [pathname]);
+    checkUserSignIn()
+  }, [accessToken]);
 
-  const getProfile = async () => {
-    const accessToken = localStorage.getItem('accesstoken');
-  };
   return (
     <div>
-      <Navbar profile={profile}/>
+      <Navbar profile={profile} setProfile={setProfile}/>
 
       <div className="pt-5">
 

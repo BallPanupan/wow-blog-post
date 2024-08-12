@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import checkSignIn from '@/common/checkSignIn';
 
 export default function LoginPage() {
-  const accessToken = localStorage.getItem('accesstoken');
+  const accessToken = localStorage.getItem('accesstoken') || null;
   const [username, setUsername] = useState('');
   const [error, setError] = useState<string | null>(null);
 

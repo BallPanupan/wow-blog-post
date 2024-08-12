@@ -1,5 +1,6 @@
 const checkSignIn: React.FC<any> = async (accessToken: string): Promise<any> => {
 	if(!accessToken) return {status: false}
+	// return false
 	const response = await fetch('http://localhost:3001/profile', {
 		method: 'GET',
 		headers: {

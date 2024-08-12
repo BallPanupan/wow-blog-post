@@ -5,12 +5,24 @@ import Navbar from "@/components/Navbar/Navbar";
 import MenuLeft from "@/components/MenuLeft/MenuLeft";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import Post from "@/components/PostList/Post";
+import { useEffect, useState } from "react";
+import checkSignIn from "@/common/checkSignIn";
 
 export default function OurBlog() {
+  const accessToken = localStorage.getItem('accesstoken') || null;
+  const [profile, setProfile] = useState<any>(null); // Initialize with null or empty object
+
+  useEffect(() => {
+    const checkUserSignIn = async () => {
+      const isSignIn: any = await checkSignIn(accessToken);
+      setProfile(isSignIn.data)
+    }
+    checkUserSignIn()
+  }, [accessToken]);
 
   return (
     <div>
-      <Navbar />
+      <Navbar profile={profile} setProfile={setProfile}/>
 
       <div className="pt-5">
 

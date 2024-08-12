@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import styles from "./navbar.module.css";
 import Image from 'next/image';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-const Navbar: React.FC<any> = ({profile}: any) => {
-  // console.log('profile', profile);
-  const pathname = usePathname(); // Returns the current path
-  const searchParams = useSearchParams(); // Returns the current query parameters
-
+const Navbar: React.FC<any> = ({profile, setProfile}: any) => {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const currentUrl = `${pathname}${searchParams.toString() ? '?' + searchParams.toString() : ''}`;
-  // console.log(currentUrl);
-
   const btnActive = {
     'home': currentUrl === '/' ? 'active' : '',
     'ourBlog': currentUrl === '/post' ? 'active' : '',
   }
+
+  const handleSignOut = async () => {
+    localStorage.removeItem('accesstoken');
+    setProfile({})
+    return true
+  } 
 
   return (
     <nav className={`${styles.navbarBGColor} navbar navbar-expand-lg navbar-dark fixed-top`}>
@@ -57,11 +59,31 @@ const Navbar: React.FC<any> = ({profile}: any) => {
           <div className="offcanvas-body">
             <ul className="navbar-nav justify-content-end flex-grow-1 pe-3 gap-2">
               <li>
-                <Link 
-                  className={`${styles.signIn}`} 
-                  aria-current="page" href="/login">
-                  Sign In
-                </Link>
+                {
+                  profile && profile?.username ?
+                    <div className='d-flex align-items-center gap-3'>
+                      <div className="dropdown">
+                        <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          {profile.username}
+                        </button>
+                        <ul className="dropdown-menu">
+                          <li><a className="dropdown-item" href="#" onClick={handleSignOut}>Sign out</a></li>
+                        </ul>
+                      </div>
+                      <Image
+                        className=""
+                        alt="arrow"
+                        src={'/images/profile.png'}
+                        height={35}
+                        width={35}
+                      />
+                    </div> :
+                    <Link
+                      className={`${styles.signIn}`}
+                      aria-current="page" href="/login">
+                      Sign In
+                    </Link>
+                }
               </li>
               <li className={`nav-item ${styles.desktop}`}>
                 <Link className={`nav-link d-flex gap-2 ${btnActive.home}`} aria-current="page" href="/">
