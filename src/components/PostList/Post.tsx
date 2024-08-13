@@ -169,7 +169,7 @@ export default function Post({content, profile, fetchPosts}: any) {
 					<div className={styles.tags}>{content?.community || ''}</div>
 				</div>
 
-				<Link href={`/post/${content?._id}`} className={styles.topic}>
+				<Link href={`/post/${content.community}?id=${content?._id}`} className={styles.topic}>
 					<h4 className='fw-bold'>{content?.topic || ''}</h4>
 				</Link>
 				<p className={styles.postContent}>

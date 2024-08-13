@@ -7,13 +7,22 @@ import Image from "next/image";
 import Link from "next/link";
 import Comment from "@/components/Comment/Comment";
 import { useState } from "react";
+import { useParams, useSearchParams } from 'next/navigation';
 
 export default function post() {
+  // const params = useParams();
+  // const data = params;
+
+  // console.log('id', data);
+
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
+  console.log('id', id);
+
+
 
   const [addCommentStatus, setAddCommentStatus] = useState<boolean | false>(false);
   
-  console.log('addCommentStatus', addCommentStatus);
-
   const handleClick = () => {
     setAddCommentStatus(!addCommentStatus); // Toggle the status
   };
