@@ -2,27 +2,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import styles from "./post.module.css";
 import Link from 'next/link';
-
-const ModalDeletePost = () => {
-	return (
-		<>
-			<div className={`modal fade align-content-center`} id="deletePost" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div className="modal-dialog d-flex justify-content-center">
-					<div className={`modal-content ${styles.modalcontentDeletePost}`}>
-						<div className="modal-body d-flex gap-2 flex-column align-items-center">
-							<h6>Please confirm if you wish to delete the post</h6>
-							<p className='text-center'>Are you sure you want to delete the post? Once deleted, it cannot be recovered.</p>
-						</div>
-						<div className="modal-footer border-0">
-							<button type="button" className="normal-Btn ml-2" data-bs-dismiss="modal">Close</button>
-							<button type="button" className="delete-Btn" data-bs-dismiss="modal">Delete</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</>
-	)
-}
+import ModalDeletePost from '../ModalDeletePost/ModalDeletePost';
 
 const ModalEditePost = ({ newPost, setNewPost, communityList, handleClick }: any) => {
 	return (
@@ -89,7 +69,12 @@ const ModalEditePost = ({ newPost, setNewPost, communityList, handleClick }: any
 	)
 }
 
-export default function Post({content, profile}: any) {
+export default function Post({content, profile, fetchPosts}: any) {
+	const [dataDeletePost, setDataDeletePost] = useState(null);
+  const handleShowDelete = () => {
+    setDataDeletePost(null);
+  };
+
 	const [newPost, setNewPost] = useState({
 		title: '',
 		content: '',
@@ -97,7 +82,6 @@ export default function Post({content, profile}: any) {
 	});
 
 	const handleClick = () => {
-		console.log('newPost: ', newPost);
 		setNewPost({
 			title: '',
 			content: '',
@@ -116,14 +100,18 @@ export default function Post({content, profile}: any) {
 		'Others',
 	]
 
-	const Editor = () => {
-		if (profile?._id === content?.user?._id) {
+	const handleShow = (content: any) => {
+		setDataDeletePost(content.data)
+	}
+
+	const Editor = (content: any) => {		
+		if (profile?._id === content?.data?.user?._id) {
 			return (
 				<>
 					<Image
 						className='cursor-pointer'
 						src={'./icon/edit-03.svg'}
-						alt='login board'
+						alt='edit'
 						width={30}
 						height={30}
 						data-bs-toggle="modal"
@@ -132,11 +120,10 @@ export default function Post({content, profile}: any) {
 					<Image
 						className='cursor-pointer'
 						src={'./icon/trash-01.svg'}
-						alt='login board'
+						alt='delete'
 						width={30}
 						height={30}
-						data-bs-toggle="modal"
-						data-bs-target="#deletePost"
+						onClick={() => handleShow(content)}
 					/>
 				</>
 			)
@@ -146,57 +133,66 @@ export default function Post({content, profile}: any) {
 	}
 
 	return (
-		<div className={`${styles.postContainer} flex-column`}>
-			<div className='d-flex gap-2 justify-content-between'>
+		<>
+			<ModalDeletePost
+				show={dataDeletePost}
+				onClose={handleShowDelete}
+				content={dataDeletePost}
+				fetchPosts={fetchPosts}
+			/>
+
+			<div className={`${styles.postContainer} flex-column`}>
+				<div className='d-flex gap-2 justify-content-between'>
+					<div className='d-flex align-items-center gap-2'>
+						<div className={`${styles.avatar}`}>
+							<Image
+								src={'/images/profile.png'}
+								alt='login board'
+								width={50}
+								height={50}
+							/>
+						</div>
+						<div>{content?.user.username || ''}</div>
+					</div>
+
+
+					<div className='d-flex flex-column align-items-end'>
+						<div className='d-flex gap-2 cursor-pointer'>
+							<Editor data={content} />
+						</div>
+					</div>
+
+
+				</div>
+
+				<div className='d-flex gap-2 mb-2 mt-2'>
+					<div className={styles.tags}>{content?.community || ''}</div>
+				</div>
+
+				<Link href='/post' className={styles.topic}>
+					<h4 className='fw-bold'>{content?.topic || ''}</h4>
+				</Link>
+				<p className={styles.postContent}>
+					{content?.content || ''}
+				</p>
 				<div className='d-flex align-items-center gap-2'>
-					<div className={`${styles.avatar}`}>
+					<div>
 						<Image
-							src={'/images/profile.png'}
+							src={'./icon/message-circle-02.svg'}
 							alt='login board'
-							width={50}
-							height={50}
+							width={30}
+							height={30}
 						/>
 					</div>
-					<div>{content?.user.username || ''}</div>
+					<div>32 Comments</div>
 				</div>
-
-
-				<div className='d-flex flex-column align-items-end'>
-					<div className='d-flex gap-2 cursor-pointer'>
-						<Editor />
-					</div>
-				</div>
-
-
+				{/* <ModalDeletePost postId={content._id}/> */}
+				<ModalEditePost newPost={newPost}
+					setNewPost={setNewPost}
+					communityList={communityList}
+					handleClick={handleClick}
+				/>
 			</div>
-
-			<div className='d-flex gap-2 mb-2 mt-2'>
-				<div className={styles.tags}>{content?.community || ''}</div>
-			</div>
-
-			<Link href='/post' className={styles.topic}>
-				<h4 className='fw-bold'>{content?.topic || ''}</h4>
-			</Link>
-			<p className={styles.postContent}>
-				{content?.content || ''}
-			</p>
-			<div className='d-flex align-items-center gap-2'>
-				<div>
-					<Image
-						src={'./icon/message-circle-02.svg'}
-						alt='login board'
-						width={30}
-						height={30}
-					/>
-				</div>
-				<div>32 Comments</div>
-			</div>
-			<ModalDeletePost />
-			<ModalEditePost newPost={newPost}
-				setNewPost={setNewPost}
-				communityList={communityList}
-				handleClick={handleClick}
-			/>
-		</div>
+		</>
 	);
 }

@@ -6,14 +6,12 @@ import Navbar from "@/components/Navbar/Navbar";
 import MenuLeft from "@/components/MenuLeft/MenuLeft";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import Post from "@/components/PostList/Post";
-import { usePathname } from "next/navigation";
-import { useRouter } from 'next/navigation';
 import checkSignIn from "@/common/checkSignIn";
 import ErrorModal from "@/components/ErrorModal/ErrorModal";
 
 export default function Home() {
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [profile, setProfile] = useState<any>(null); // Initialize with null or empty object
+  const [profile, setProfile] = useState<any>(null);
   const [posts, setPosts] = useState<any>([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [searchcommunity, setSearchcommunity] = useState<any>('')
@@ -54,7 +52,6 @@ export default function Home() {
     }
   };
 
-
   const fetchPosts = useCallback(async () => {
     const posts = await getAllPosts();
     setPosts(posts.reverse());
@@ -70,13 +67,18 @@ export default function Home() {
         {
           posts
             .filter((content: any) => (
-              searchcommunity === 'All' || 
-              searchcommunity === '' || 
+              searchcommunity === 'All' ||
+              searchcommunity === '' ||
               content.community === searchcommunity
             ))
             .filter((content: any) => content.topic.includes(searchPost))
             .map((content: any, index: any) => (
-              <Post key={index} content={content} profile={profile}/>
+              <Post 
+                key={index} 
+                content={content}
+                profile={profile} 
+                fetchPosts={fetchPosts}
+              />
             ))
         }
       </>
@@ -89,7 +91,6 @@ export default function Home() {
         profile={profile}
         setProfile={setProfile}
       />
-
 
       <div className="pt-5">
 
