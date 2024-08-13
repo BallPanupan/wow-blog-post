@@ -16,7 +16,9 @@ export default function Home() {
   const [profile, setProfile] = useState<any>(null); // Initialize with null or empty object
   const [posts, setPosts] = useState<any>([]);
   const [errorMessage, setErrorMessage] = useState('');
-
+  const [searchcommunity, setSearchcommunity] = useState<any>('')
+  const [searchPost, setSearchPost] = useState<any>('')
+  
   const handleShowError = () => {
     setErrorMessage('');
   };
@@ -41,7 +43,7 @@ export default function Home() {
           'Content-Type': 'application/json',
         },
       });
-  
+
       if (!response.ok) {
         throw new Error('Failed to fetch Post');
       }
@@ -51,7 +53,7 @@ export default function Home() {
       return [];
     }
   };
-  
+
 
   const fetchPosts = useCallback(async () => {
     const posts = await getAllPosts();
@@ -65,19 +67,29 @@ export default function Home() {
   const ListPosts = () => {
     return (
       <>
-        {posts.map((content: any, index: any) => (
-          <Post key={index} content={content} />
-        ))}
+        {
+          posts
+            .filter((content: any) => (
+              searchcommunity === 'All' || 
+              searchcommunity === '' || 
+              content.community === searchcommunity
+            ))
+            .filter((content: any) => content.topic.includes(searchPost))
+            .map((content: any, index: any) => (
+              <Post key={index} content={content} />
+            ))
+        }
       </>
     );
   };
 
-
-
   return (
     <div>
-      <Navbar profile={profile} setProfile={setProfile}/>
-      
+      <Navbar
+        profile={profile}
+        setProfile={setProfile}
+      />
+
 
       <div className="pt-5">
 
@@ -87,8 +99,15 @@ export default function Home() {
             <div className={`col-2 ${styles.offcanvasBody}`}><MenuLeft /></div>
 
             <div className={`col-8 pt-5 mb-5 ${styles.mainContent}`}>
-              
-              <SearchBar setErrorMessage={setErrorMessage} fetchPosts={fetchPosts}/>
+
+              <SearchBar
+                setErrorMessage={setErrorMessage}
+                fetchPosts={fetchPosts}
+                searchcommunity={searchcommunity}
+                setSearchcommunity={setSearchcommunity}
+                searchPost={searchPost} 
+                setSearchPost={setSearchPost}
+              />
 
               <ErrorModal
                 show={errorMessage}
@@ -97,7 +116,7 @@ export default function Home() {
               />
 
               <div className={styles.listPosts}>
-                { <ListPosts /> }
+                {<ListPosts />}
               </div>
 
             </div>
@@ -109,7 +128,7 @@ export default function Home() {
         </div>
 
       </div>
-      
+
     </div>
   )
 

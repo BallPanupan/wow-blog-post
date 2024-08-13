@@ -4,13 +4,20 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import styles from "./searchBar.module.css";
 
-export default function SearchBar({setErrorMessage, fetchPosts}: any) {
-  const [accessToken, setAccessToken] = useState<string | null>(null);
+export default function SearchBar({
+	setErrorMessage,
+	fetchPosts,
+	searchcommunity,
+	setSearchcommunity,
+	searchPost,
+	setSearchPost
+}: any) {
+	const [accessToken, setAccessToken] = useState<string | null>(null);
 
 	useEffect(() => {
-    const token = localStorage.getItem('accesstoken');
-    setAccessToken(token ? token : null);
-  }, [accessToken]);
+		const token = localStorage.getItem('accesstoken');
+		setAccessToken(token ? token : null);
+	}, [accessToken]);
 
 	interface Post {
 		topic: string;
@@ -18,17 +25,23 @@ export default function SearchBar({setErrorMessage, fetchPosts}: any) {
 		community: string | null;
 	}
 
-	const [searchcommunity, setSearchcommunity] = useState<any>()
-  const [newPost, setNewPost] = useState<Post>({
+	const [newPost, setNewPost] = useState<Post>({
 		topic: '',
-    content: '',
-    community: '',
+		content: '',
+		community: '',
 	});
+
+
+	const selectCommunity = async (name: string) => {
+		if (name === 'All') setSearchcommunity(null);
+		setSearchcommunity(name);
+		return true;
+	};
 
 	// handle Create new Post
 	const handleClick = async () => {
 		try {
-			if( (!newPost.topic && !newPost.content && !newPost.community)){
+			if ((!newPost.topic && !newPost.content && !newPost.community)) {
 				throw new Error(`community, topic and content can't be empty`)
 			}
 			if (!accessToken) throw new Error(`Please sign in to create a new post.`)
@@ -40,9 +53,9 @@ export default function SearchBar({setErrorMessage, fetchPosts}: any) {
 						'Authorization': `Bearer ${accessToken}`,
 					},
 					body: JSON.stringify(newPost),
-					
+
 				});
-		
+
 				await fetchPosts();
 
 				if (!response.ok) {
@@ -57,6 +70,7 @@ export default function SearchBar({setErrorMessage, fetchPosts}: any) {
 	};
 
 	const communityList = [
+		'All',
 		'History',
 		'Food',
 		'Pats',
@@ -69,17 +83,19 @@ export default function SearchBar({setErrorMessage, fetchPosts}: any) {
 	return (
 		<div className='d-flex align-items-center justify-content-end p-1 gap-1 mb-4'>
 			<div className={`input-group align-items-center ${styles.searchInput}`}>
-				<Image 
+				<Image
 					alt='search'
-					src={'./icon/search-md.svg'} 
+					src={'./icon/search-md.svg'}
 					width={24}
-          height={24}
-				 />
+					height={24}
+				/>
 				<input
 					type="text"
 					className={`form-control ${styles.formControl} ${styles.inputFocus}`}
 					placeholder="Search"
 					aria-label="Search"
+					value={searchPost}
+					onChange={(e)=> setSearchPost(e.target.value)}
 				/>
 			</div>
 			<div className="dropdown ms-3">
@@ -90,16 +106,16 @@ export default function SearchBar({setErrorMessage, fetchPosts}: any) {
 					data-bs-toggle="dropdown"
 					aria-expanded="false"
 				>
-					{ !searchcommunity ? 'Community' : searchcommunity }
+					{!searchcommunity ? 'Community' : searchcommunity}
 				</button>
 				<ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					{ 
+					{
 						communityList.length <= 0 ? null : communityList.map((name, index) => {
 							return (
 								<li key={index}>
 									<a
 										className="dropdown-item"
-										onClick={() => setSearchcommunity(name)}
+										onClick={() => selectCommunity(name)}
 										href="#"
 									>{name}</a>
 								</li>
@@ -108,7 +124,7 @@ export default function SearchBar({setErrorMessage, fetchPosts}: any) {
 					}
 				</ul>
 			</div>
-			<button 
+			<button
 				className={`btn bg-success p-1 ${styles.create}`}
 				data-bs-toggle="modal" data-bs-target="#exampleModal"
 			>Create&nbsp;+
@@ -140,8 +156,8 @@ export default function SearchBar({setErrorMessage, fetchPosts}: any) {
 									<ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										{communityList.map((name, index) => (
 											<li key={index}>
-												<a 
-													className="dropdown-item" 
+												<a
+													className="dropdown-item"
 													onClick={() => setNewPost({ ...newPost, 'community': name })}
 													href="#"
 												>

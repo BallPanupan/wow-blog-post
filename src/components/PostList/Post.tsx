@@ -106,6 +106,7 @@ export default function Post({content}: any) {
 	};
 
 	const communityList = [
+		'All',
 		'History',
 		'Food',
 		'Pats',
