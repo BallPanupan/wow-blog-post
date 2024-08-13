@@ -48,7 +48,6 @@ export default function LoginPage() {
   useEffect(() => {
     const checkUserSignIn = async () => {
       const isSignIn: any = await checkSignIn(accessToken);
-      console.log(isSignIn)
       if (accessToken && isSignIn.status) router.push('/');
     }
     checkUserSignIn()

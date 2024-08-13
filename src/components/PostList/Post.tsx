@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import styles from "./post.module.css";
 import Link from 'next/link';
 import ModalDeletePost from '../ModalDeletePost/ModalDeletePost';
+import ModalEditPost from '../ModalEditPost/ModalEditPost';
 
 const ModalEditePost = ({ newPost, setNewPost, communityList, handleClick }: any) => {
 	return (
@@ -71,8 +72,14 @@ const ModalEditePost = ({ newPost, setNewPost, communityList, handleClick }: any
 
 export default function Post({content, profile, fetchPosts}: any) {
 	const [dataDeletePost, setDataDeletePost] = useState(null);
+	const [dataEditPost, setDataEditPost] = useState(null);
+
   const handleShowDelete = () => {
     setDataDeletePost(null);
+  };
+
+	const handleShowEdit = () => {
+    setDataEditPost(null);
   };
 
 	const [newPost, setNewPost] = useState({
@@ -104,6 +111,10 @@ export default function Post({content, profile, fetchPosts}: any) {
 		setDataDeletePost(content.data)
 	}
 
+	const editHandleShow = (content: any) => {
+		setDataEditPost(content.data)
+	}
+
 	const Editor = (content: any) => {		
 		if (profile?._id === content?.data?.user?._id) {
 			return (
@@ -114,8 +125,8 @@ export default function Post({content, profile, fetchPosts}: any) {
 						alt='edit'
 						width={30}
 						height={30}
-						data-bs-toggle="modal"
-						data-bs-target="#editPost"
+						onClick={() => editHandleShow(content)}
+
 					/>
 					<Image
 						className='cursor-pointer'
@@ -134,6 +145,20 @@ export default function Post({content, profile, fetchPosts}: any) {
 
 	return (
 		<>
+			<ModalEditPost
+				show={dataEditPost}
+				onClose={handleShowEdit}
+				content={dataEditPost}
+				fetchPosts={fetchPosts}
+			/>
+
+
+
+
+
+
+
+
 			<ModalDeletePost
 				show={dataDeletePost}
 				onClose={handleShowDelete}
@@ -187,11 +212,11 @@ export default function Post({content, profile, fetchPosts}: any) {
 					<div>32 Comments</div>
 				</div>
 				{/* <ModalDeletePost postId={content._id}/> */}
-				<ModalEditePost newPost={newPost}
+				{/* <ModalEditePost newPost={newPost}
 					setNewPost={setNewPost}
 					communityList={communityList}
 					handleClick={handleClick}
-				/>
+				/> */}
 			</div>
 		</>
 	);

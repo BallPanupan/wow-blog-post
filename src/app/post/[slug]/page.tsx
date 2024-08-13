@@ -111,10 +111,6 @@ export default function post() {
                   />
                 </Link>
 
-
-
-
-
                 {
                   posts.map((content: any) => {
                     return (
