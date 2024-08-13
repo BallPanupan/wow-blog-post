@@ -15,6 +15,7 @@ const checkSignIn: React.FC<any> = async (accessToken: string): Promise<any> => 
 			status: true
 		};
 	}catch(error){
+		localStorage.removeItem('accesstoken');
 		return { status: false }
 	}
 };

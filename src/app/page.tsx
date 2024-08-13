@@ -27,8 +27,12 @@ export default function Home() {
 
     const accessToken = localStorage.getItem('accesstoken') ? localStorage.getItem('accesstoken') : null
     const checkUserSignIn = async () => {
-      const isSignIn: any = await checkSignIn(accessToken);
-      setProfile(isSignIn.data)
+      try{
+        const isSignIn: any = await checkSignIn(accessToken);
+        setProfile(isSignIn.data)
+      }catch{
+        localStorage.removeItem('accesstoken');
+      }
     }
     checkUserSignIn()
   }, [accessToken]);
