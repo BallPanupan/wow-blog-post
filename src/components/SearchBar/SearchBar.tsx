@@ -28,7 +28,7 @@ export default function SearchBar({
 	const [newPost, setNewPost] = useState<Post>({
 		topic: '',
 		content: '',
-		community: '',
+		community: 'Others',
 	});
 
 
@@ -53,11 +53,8 @@ export default function SearchBar({
 						'Authorization': `Bearer ${accessToken}`,
 					},
 					body: JSON.stringify(newPost),
-
 				});
-
 				await fetchPosts();
-
 				if (!response.ok) {
 					const errorMessage = response.status === 401 ? 'Unauthorized access' : 'Failed to post data';
 					throw new Error(errorMessage);
