@@ -23,7 +23,7 @@ const MenuLeft: React.FC = () => {
 				<li className={`nav-item ${styles.desktop}`}>
 					<Link className={`nav-link d-flex gap-2 ${btnActive.home}`} aria-current="page" href="/">
 						<Image
-							src={'./icon/home-line.svg'}
+							src={'/icon/home-line.svg'}
 							alt='Home'
 							width={24}
 							height={24}
@@ -35,7 +35,7 @@ const MenuLeft: React.FC = () => {
 				<li className={`nav-item ${styles.desktop}`}>
 					<Link className={`nav-link d-flex gap-2 ${btnActive.ourBlog}`} href="/ourBlog">
 						<Image
-							src={'./icon/edit-05.svg'}
+							src={'/icon/edit-05.svg'}
 							alt='Home'
 							width={24}
 							height={24}
