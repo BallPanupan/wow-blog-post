@@ -1,31 +1,60 @@
 "use client";
 
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from "./searchBar.module.css";
+import Post from '../PostList/Post';
 
-export default function SearchBar() {
+export default function SearchBar({setErrorMessage}: any) {
+  const [accessToken, setAccessToken] = useState<string | null>(null);
+
+	useEffect(() => {
+    const token = localStorage.getItem('accesstoken');
+    setAccessToken(token ? token : null);
+  }, [accessToken]);
 
 	interface Post {
-		title: string;
+		topic: string;
 		content: string;
-		communityType: string | null;
+		community: string | null;
 	}
-	const [searchCommunityType, setSearchCommunityType] = useState<any>()
+
+	const [searchcommunity, setSearchcommunity] = useState<any>()
   const [newPost, setNewPost] = useState<Post>({
-		title: '',
+		topic: '',
     content: '',
-    communityType: null,
+    community: '',
 	});
 
-	const handleClick = () => {
-		console.log('newPost: ', newPost);
-		setNewPost({
-      title: '',
-      content: '',
-      communityType: null,
-    });
-  };
+	// handle Create new Post
+	const handleClick = async () => {
+		try {
+			if( (!newPost.topic && !newPost.content && !newPost.community)){
+				throw new Error(`community, topic and content can't be empty`)
+			}
+			if (!accessToken) throw new Error(`Please sign in to create a new post.`)
+			if (accessToken) {
+				const response = await fetch('http://localhost:3001/post', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${accessToken}`,
+					},
+					body: JSON.stringify(newPost),
+				});
+		
+				if (!response.ok) {
+					const errorMessage = response.status === 401 ? 'Unauthorized access' : 'Failed to post data';
+					throw new Error(errorMessage);
+				}
+		
+				const data = await response.json();
+				console.log('create new Post: ', data);
+			}
+		} catch (err: any) {
+			setErrorMessage(err.message || 'An unexpected error occurred.')
+		}
+	};
 
 	const communityList = [
 		'History',
@@ -61,7 +90,7 @@ export default function SearchBar() {
 					data-bs-toggle="dropdown"
 					aria-expanded="false"
 				>
-					{ !searchCommunityType ? 'Community' : searchCommunityType }
+					{ !searchcommunity ? 'Community' : searchcommunity }
 				</button>
 				<ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					{ 
@@ -70,7 +99,7 @@ export default function SearchBar() {
 								<li key={index}>
 									<a
 										className="dropdown-item"
-										onClick={() => setSearchCommunityType(name)}
+										onClick={() => setSearchcommunity(name)}
 										href="#"
 									>{name}</a>
 								</li>
@@ -103,7 +132,7 @@ export default function SearchBar() {
 									aria-expanded="false"
 								>
 									{
-										!newPost.communityType ? 'Choose a community' : newPost.communityType
+										!newPost.community ? 'Choose a community' : newPost.community
 									}
 								</button>
 
@@ -113,7 +142,7 @@ export default function SearchBar() {
 											<li key={index}>
 												<a 
 													className="dropdown-item" 
-													onClick={() => setNewPost({ ...newPost, 'communityType': name })}
+													onClick={() => setNewPost({ ...newPost, 'community': name })}
 													href="#"
 												>
 													{name}
@@ -128,8 +157,8 @@ export default function SearchBar() {
 								type="text"
 								className='inputControl p-2'
 								placeholder="Title"
-								value={newPost.title}
-								onChange={(e) => setNewPost({ ...newPost, 'title': e.target.value })}
+								value={newPost.topic}
+								onChange={(e) => setNewPost({ ...newPost, 'topic': e.target.value })}
 							/>
 
 							<textarea

@@ -36,8 +36,8 @@ const ModalEditePost = ({ newPost, setNewPost, communityList, handleClick }: any
 					<div className="modal-body d-flex gap-2 flex-column">
 						<div className="dropdown">
 							<button
-								className={`btn btn-white dropdown-toggle btn-success f-post`}
 								type="button"
+								className={`btn btn-white dropdown-toggle btn-success f-post`}
 								id="dropdownMenuButton"
 								data-bs-toggle="dropdown"
 								aria-expanded="false"
