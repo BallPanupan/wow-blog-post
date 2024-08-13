@@ -89,7 +89,7 @@ const ModalEditePost = ({ newPost, setNewPost, communityList, handleClick }: any
 	)
 }
 
-export default function Post({content}: any) {
+export default function Post({content, profile}: any) {
 	const [newPost, setNewPost] = useState({
 		title: '',
 		content: '',
@@ -116,6 +116,35 @@ export default function Post({content}: any) {
 		'Others',
 	]
 
+	const Editor = () => {
+		if (profile?._id === content?.user?._id) {
+			return (
+				<>
+					<Image
+						className='cursor-pointer'
+						src={'./icon/edit-03.svg'}
+						alt='login board'
+						width={30}
+						height={30}
+						data-bs-toggle="modal"
+						data-bs-target="#editPost"
+					/>
+					<Image
+						className='cursor-pointer'
+						src={'./icon/trash-01.svg'}
+						alt='login board'
+						width={30}
+						height={30}
+						data-bs-toggle="modal"
+						data-bs-target="#deletePost"
+					/>
+				</>
+			)
+		} else {
+
+		}
+	}
+
 	return (
 		<div className={`${styles.postContainer} flex-column`}>
 			<div className='d-flex gap-2 justify-content-between'>
@@ -134,24 +163,7 @@ export default function Post({content}: any) {
 
 				<div className='d-flex flex-column align-items-end'>
 					<div className='d-flex gap-2 cursor-pointer'>
-						<Image
-							className='cursor-pointer'
-							src={'./icon/edit-03.svg'}
-							alt='login board'
-							width={30}
-							height={30}
-							data-bs-toggle="modal"
-							data-bs-target="#editPost"
-						/>
-						<Image
-							className='cursor-pointer'
-							src={'./icon/trash-01.svg'}
-							alt='login board'
-							width={30}
-							height={30}
-							data-bs-toggle="modal"
-							data-bs-target="#deletePost"
-						/>
+						<Editor />
 					</div>
 				</div>
 

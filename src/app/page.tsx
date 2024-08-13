@@ -18,7 +18,7 @@ export default function Home() {
   const [errorMessage, setErrorMessage] = useState('');
   const [searchcommunity, setSearchcommunity] = useState<any>('')
   const [searchPost, setSearchPost] = useState<any>('')
-  
+
   const handleShowError = () => {
     setErrorMessage('');
   };
@@ -76,7 +76,7 @@ export default function Home() {
             ))
             .filter((content: any) => content.topic.includes(searchPost))
             .map((content: any, index: any) => (
-              <Post key={index} content={content} />
+              <Post key={index} content={content} profile={profile}/>
             ))
         }
       </>

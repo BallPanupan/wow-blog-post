@@ -201,3 +201,6 @@ export default function SearchBar({
 		</div>
 	);
 }
+
+
+// profile._id === content.user._id
