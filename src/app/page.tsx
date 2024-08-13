@@ -43,11 +43,11 @@ export default function Home() {
       });
   
       if (!response.ok) {
-        throw new Error('Failed to fetch posts');
+        throw new Error('Failed to fetch Post');
       }
       return await response.json();
-    } catch (err) {
-      console.error('Error fetching posts:', err);
+    } catch (error: any) {
+      setErrorMessage('Failed to fetch Post')
       return [];
     }
   };
@@ -88,7 +88,7 @@ export default function Home() {
 
             <div className={`col-8 pt-5 mb-5 ${styles.mainContent}`}>
               
-              <SearchBar setErrorMessage={setErrorMessage}/>
+              <SearchBar setErrorMessage={setErrorMessage} fetchPosts={fetchPosts}/>
 
               <ErrorModal
                 show={errorMessage}

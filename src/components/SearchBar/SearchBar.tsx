@@ -3,9 +3,8 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import styles from "./searchBar.module.css";
-import Post from '../PostList/Post';
 
-export default function SearchBar({setErrorMessage}: any) {
+export default function SearchBar({setErrorMessage, fetchPosts}: any) {
   const [accessToken, setAccessToken] = useState<string | null>(null);
 
 	useEffect(() => {
@@ -41,15 +40,16 @@ export default function SearchBar({setErrorMessage}: any) {
 						'Authorization': `Bearer ${accessToken}`,
 					},
 					body: JSON.stringify(newPost),
+					
 				});
 		
+				await fetchPosts();
+
 				if (!response.ok) {
 					const errorMessage = response.status === 401 ? 'Unauthorized access' : 'Failed to post data';
 					throw new Error(errorMessage);
 				}
-		
 				const data = await response.json();
-				console.log('create new Post: ', data);
 			}
 		} catch (err: any) {
 			setErrorMessage(err.message || 'An unexpected error occurred.')
