@@ -6,23 +6,44 @@ import MenuLeft from "@/components/MenuLeft/MenuLeft";
 import Image from "next/image";
 import Link from "next/link";
 import Comment from "@/components/Comment/Comment";
-import { useState } from "react";
-import { useParams, useSearchParams } from 'next/navigation';
+import { useCallback, useEffect, useState } from "react";
+import { useSearchParams } from 'next/navigation';
 
 export default function post() {
-  // const params = useParams();
-  // const data = params;
-
-  // console.log('id', data);
+  const [posts, setPosts] = useState<any>([]);
 
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
-  console.log('id', id);
-
-
 
   const [addCommentStatus, setAddCommentStatus] = useState<boolean | false>(false);
   
+  const getAllPosts = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/post?id=${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch Post');
+      }
+      return await response.json();
+    } catch (error: any) {
+      return [];
+    }
+  };
+
+  const fetchPosts = useCallback(async () => {
+    const data = await getAllPosts();
+    setPosts(data);
+  }, []);
+
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts]);
+
   const handleClick = () => {
     setAddCommentStatus(!addCommentStatus); // Toggle the status
   };
@@ -65,7 +86,6 @@ export default function post() {
     )
   }
 
-
   return (
     <div>
       <Navbar />
@@ -91,55 +111,61 @@ export default function post() {
                   />
                 </Link>
 
-                <div className={`flex-column`}>
-                  <div className='d-flex gap-2 justify-content-between'>
-                    <div className='d-flex align-items-center gap-2'>
-                      <div className={`${styles.avatar}`}>
-                        <Image
-                          src={'/images/profile.png'}
-                          alt='login board'
-                          width={50}
-                          height={50}
-                        />
+
+
+
+
+                {
+                  posts.map((content: any) => {
+                    console.log(content)
+                    return (
+                      <div key={content._id} className={`flex-column`}>
+                        <div className='d-flex gap-2 justify-content-between'>
+                          <div className='d-flex align-items-center gap-2'>
+                            <div className={`${styles.avatar}`}>
+                              <Image
+                                src={'/images/profile.png'}
+                                alt='login board'
+                                width={50}
+                                height={50}
+                              />
+                            </div>
+                            <div>{content?.user?.username}</div>
+                          </div>
+                          <div>
+                            <Image
+                              src={'/icon/star.svg'}
+                              alt='login board'
+                              width={30}
+                              height={30}
+                            />
+                          </div>
+                        </div>
+
+                        <div className='d-flex gap-2 mb-2 mt-2'>
+                          <div className={styles.tags}>{content?.community}</div>
+                        </div>
+
+                        <h4 className='fw-bold'>{content?.topic}</h4>
+                        <p className={styles.postContent}>{content.content}</p>
+                        <div className='d-flex align-items-center gap-2'>
+                          <div>
+                            <Image
+                              src={'/icon/message-circle-02.svg'}
+                              alt='login board'
+                              width={30}
+                              height={30}
+                            />
+                          </div>
+                          <div>32 Comments</div>
+                        </div>
                       </div>
-                      <div>Jassica</div>
-                    </div>
-                    <div>
-                      <Image
-                        src={'/icon/star.svg'}
-                        alt='login board'
-                        width={30}
-                        height={30}
-                      />
-                    </div>
-                  </div>
+                    )
+                  }) || null
+                }
 
-                  <div className='d-flex gap-2 mb-2 mt-2'>
-                    <div className={styles.tags}>History</div>
-                  </div>
 
-                  <h4 className='fw-bold'>header: The Beginning og the end of the world</h4>
-                  <p className={styles.postContent}>
-                    The afterlife sitcom The Good Place comes to its culmination, the show’s
-                    two protagonists, Eleanor and Chidi, contemplate their future. Having
-                    lived thousands upon thousands of lifetimes together, and having experienced
-                    virtually everything this life has to offer, they are weary. It is time for
-                    it all to end. The show’s solution to this perpetual happiness-cum-weariness
-                    is extinction. When you have had enough, when you are utterly sated by love and
-                    joy and pleasure, you can walk through a passage to nothingness. And Chidi has had enough.
-                  </p>
-                  <div className='d-flex align-items-center gap-2'>
-                    <div>
-                      <Image
-                        src={'/icon/message-circle-02.svg'}
-                        alt='login board'
-                        width={30}
-                        height={30}
-                      />
-                    </div>
-                    <div>32 Comments</div>
-                  </div>
-                </div>
+
 
 
                 { !addCommentStatus ? <AddCommentBtn /> : <TextComment /> }
