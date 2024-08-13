@@ -30,8 +30,8 @@ export default function Home() {
       try{
         const isSignIn: any = await checkSignIn(accessToken);
         setProfile(isSignIn.data)
-      }catch{
-        localStorage.removeItem('accesstoken');
+      }catch(error){
+        console.error(error)
       }
     }
     checkUserSignIn()
