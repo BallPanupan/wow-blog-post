@@ -11,9 +11,6 @@ import { useState } from "react";
 export default function post() {
 
   const [addCommentStatus, setAddCommentStatus] = useState<boolean | false>(false);
-  
-  console.log('addCommentStatus', addCommentStatus);
-
   const handleClick = () => {
     setAddCommentStatus(!addCommentStatus); // Toggle the status
   };

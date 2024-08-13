@@ -117,7 +117,6 @@ export default function post() {
 
                 {
                   posts.map((content: any) => {
-                    console.log(content)
                     return (
                       <div key={content._id} className={`flex-column`}>
                         <div className='d-flex gap-2 justify-content-between'>

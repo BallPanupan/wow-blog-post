@@ -58,7 +58,6 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    console.log(accessToken)
     fetchPosts();
   }, [fetchPosts]);
 
