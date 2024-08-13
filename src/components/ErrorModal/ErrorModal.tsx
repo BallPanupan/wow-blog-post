@@ -1,5 +1,3 @@
-// components/ErrorModal.js
-import { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 const ErrorModal = ({ show, onClose, message }: any) => {
