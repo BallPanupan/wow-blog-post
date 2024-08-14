@@ -9,11 +9,14 @@ import Comment from "@/components/Comment/Comment";
 import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from 'next/navigation';
 import checkSignIn from "@/common/checkSignIn";
+import ErrorModal from "@/components/ErrorModal/ErrorModal";
 
 export default function post() {
   const [posts, setPosts] = useState<any>([]);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [profile, setProfile] = useState<any>(null);
+  const [errorModalStatus, setErrorModalStatus] = useState<any>({});
+
 
   useEffect(() => {
     const token = localStorage.getItem('accesstoken');
@@ -112,6 +115,13 @@ export default function post() {
       if (action === 'cancel') {
         setAddCommentStatus(false);
       } else if (action === 'post') {
+        if(!accessToken){
+          setErrorModalStatus({
+            show: true,
+            onClose: false,
+            message: 'Please Sign in to add a new comment.',
+          })
+        }
         fetchNewComment(posts[0], newComment);
         setAddCommentStatus(false);
       }
@@ -155,6 +165,11 @@ export default function post() {
         setProfile={setProfile}
       />
 
+      <ErrorModal 
+        show={errorModalStatus.show} 
+        onClose={setErrorModalStatus} 
+        message={errorModalStatus.message}
+      />
 
       <div className="pt-5">
 
