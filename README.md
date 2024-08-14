@@ -8,7 +8,7 @@ Web projects can post new topics and comment within the topic.
 ## Features
 
 - member 
-  - Sign In with only username
+  - Sign In with only username (authentication system)
 
 - Topic or new Post
   - Edit 
