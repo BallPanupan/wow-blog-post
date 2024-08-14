@@ -8,15 +8,34 @@ import Link from "next/link";
 import Comment from "@/components/Comment/Comment";
 import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from 'next/navigation';
+import checkSignIn from "@/common/checkSignIn";
 
 export default function post() {
   const [posts, setPosts] = useState<any>([]);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [profile, setProfile] = useState<any>(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem('accesstoken');
+    setAccessToken(token ? token : null);
+
+    const accessToken = localStorage.getItem('accesstoken') ? localStorage.getItem('accesstoken') : null
+    const checkUserSignIn = async () => {
+      try{
+        const isSignIn: any = await checkSignIn(accessToken);
+        setProfile(isSignIn.data)
+      }catch(error){
+        console.error(error)
+      }
+    }
+    checkUserSignIn()
+  }, [accessToken]);
 
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
 
   const [addCommentStatus, setAddCommentStatus] = useState<boolean | false>(false);
-  
+
   const getAllPosts = async () => {
     try {
       const response = await fetch(`http://localhost:3001/post?id=${id}`, {
@@ -40,6 +59,31 @@ export default function post() {
     setPosts(data);
   }, []);
 
+  const fetchNewComment = async (postDetail: any, comment: any) => {
+    console.log('posts',{
+      accessToken, 
+      postDetail
+    });
+    try {
+      const response = await fetch('http://localhost:3001/post/newComment?id=66ba59b51004ba0a897c6c66', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`
+        },
+        body: JSON.stringify({'comment': comment}),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch Post');
+      }
+      return true
+    } catch (error: any) {
+      // setErrorMessage('Failed to fetch Post')
+      return [];
+    }
+  }
+
   useEffect(() => {
     fetchPosts();
   }, [fetchPosts]);
@@ -62,22 +106,40 @@ export default function post() {
   };
 
   const TextComment = () => {
+    const [newComment, setNewComment] = useState('');
+
+    const handleClick = (action: any) => {
+      if (action === 'cancel') {
+        setAddCommentStatus(false);
+      } else if (action === 'post') {
+        fetchNewComment(posts[0], newComment);
+        setAddCommentStatus(false);
+      }
+      setNewComment('');
+    };
+
     return (
       <div className="mt-5 mb-5">
         <textarea
-          className={`${styles.commentControl}`}
-          placeholder="What’s on your mind..."
-        ></textarea>
+          name="new-comment"
+          className={styles.commentControl}
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+          placeholder="What's on your mind..."
+          rows={3}
+          cols={50}
+        />
+
         <div className="d-flex justify-content-end gap-2">
           <button
             className={styles.addCommentsBtn}
-            onClick={handleClick}
+            onClick={() => handleClick('cancel')}
           >
             Cancel
           </button>
           <button
             className={styles.postCommentsBtn}
-            onClick={handleClick}
+            onClick={() => handleClick('post')}
           >
             Post
           </button>
@@ -88,7 +150,11 @@ export default function post() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar
+        profile={profile}
+        setProfile={setProfile}
+      />
+
 
       <div className="pt-5">
 
@@ -163,7 +229,7 @@ export default function post() {
 
 
 
-                { !addCommentStatus ? <AddCommentBtn /> : <TextComment /> }
+                {!addCommentStatus ? <AddCommentBtn /> : <TextComment />}
 
 
                 {/* commment component */}
