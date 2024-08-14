@@ -64,10 +64,6 @@ export default function post() {
   }, []);
 
   const fetchNewComment = async (postDetail: any, comment: any) => {
-    console.log('fetchPosts',{
-      accessToken, 
-      postDetail
-    });
     try {
       const response = await fetch(`http://localhost:3001/post/newComment?id=${postDetail._id}`, {
         method: 'POST',
