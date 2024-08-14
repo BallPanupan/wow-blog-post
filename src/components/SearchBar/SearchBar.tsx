@@ -38,7 +38,6 @@ export default function SearchBar({
 		return true;
 	};
 
-	// handle Create new Post
 	const handleClick = async () => {
 		try {
 			if ((!newPost.topic && !newPost.content && !newPost.community)) {
@@ -198,6 +197,3 @@ export default function SearchBar({
 		</div>
 	);
 }
-
-
-// profile._id === content.user._id

@@ -6,8 +6,8 @@ import { usePathname, useSearchParams } from 'next/navigation';
 
 const MenuLeft: React.FC = () => {
 
-	const pathname = usePathname(); // Returns the current path
-	const searchParams = useSearchParams(); // Returns the current query parameters
+	const pathname = usePathname();
+	const searchParams = useSearchParams(); 
 
 	const currentUrl = `${pathname}${searchParams.toString() ? '?' + searchParams.toString() : ''}`;
 

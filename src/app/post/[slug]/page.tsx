@@ -79,7 +79,6 @@ export default function post() {
       }
       return true
     } catch (error: any) {
-      // setErrorMessage('Failed to fetch Post')
       return [];
     }
   }
@@ -89,7 +88,7 @@ export default function post() {
   }, [fetchPosts, refreshPost]);
 
   const handleClick = () => {
-    setAddCommentStatus(!addCommentStatus); // Toggle the status
+    setAddCommentStatus(!addCommentStatus); 
   };
 
   const AddCommentBtn = (): React.ReactNode => {

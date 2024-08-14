@@ -12,7 +12,7 @@ export default function post() {
 
   const [addCommentStatus, setAddCommentStatus] = useState<boolean | false>(false);
   const handleClick = () => {
-    setAddCommentStatus(!addCommentStatus); // Toggle the status
+    setAddCommentStatus(!addCommentStatus); 
   };
 
   const AddCommentBtn = (): React.ReactNode => {
