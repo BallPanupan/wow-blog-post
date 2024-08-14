@@ -46,7 +46,7 @@ NEXT_PUBLIC_API_URL=http://localhost:3001
 ```
 
 
-### 2. Start the project in development mode
+### 3. Start the project in development mode
 ```
 npm run dev  
 ```
