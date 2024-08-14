@@ -17,6 +17,7 @@ export default function post() {
   const [profile, setProfile] = useState<any>(null);
   const [errorModalStatus, setErrorModalStatus] = useState<any>({});
 
+  const [refreshPost, setRefreshPost] = useState<any>(false);
 
   useEffect(() => {
     const token = localStorage.getItem('accesstoken');
@@ -39,7 +40,7 @@ export default function post() {
 
   const [addCommentStatus, setAddCommentStatus] = useState<boolean | false>(false);
 
-  const getAllPosts = async () => {
+  const getPost = async () => {
     try {
       const response = await fetch(`http://localhost:3001/post?id=${id}`, {
         method: 'GET',
@@ -58,17 +59,17 @@ export default function post() {
   };
 
   const fetchPosts = useCallback(async () => {
-    const data = await getAllPosts();
+    const data = await getPost();
     setPosts(data);
   }, []);
 
   const fetchNewComment = async (postDetail: any, comment: any) => {
-    console.log('posts',{
+    console.log('fetchPosts',{
       accessToken, 
       postDetail
     });
     try {
-      const response = await fetch('http://localhost:3001/post/newComment?id=66ba59b51004ba0a897c6c66', {
+      const response = await fetch(`http://localhost:3001/post/newComment?id=${postDetail._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -89,7 +90,7 @@ export default function post() {
 
   useEffect(() => {
     fetchPosts();
-  }, [fetchPosts]);
+  }, [fetchPosts, refreshPost]);
 
   const handleClick = () => {
     setAddCommentStatus(!addCommentStatus); // Toggle the status
@@ -124,8 +125,9 @@ export default function post() {
         }
         fetchNewComment(posts[0], newComment);
         setAddCommentStatus(false);
+        setRefreshPost(!refreshPost)
       }
-      setNewComment('');
+      fetchPosts()
     };
 
     return (
@@ -233,7 +235,7 @@ export default function post() {
                               height={30}
                             />
                           </div>
-                          <div>32 Comments</div>
+                          <div>{posts[0].comments.length || 0} Comments</div>
                         </div>
                       </div>
                     )
@@ -247,13 +249,13 @@ export default function post() {
                 {!addCommentStatus ? <AddCommentBtn /> : <TextComment />}
 
 
-                {/* commment component */}
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
+                {posts[0]?.comments.length > 1 ? (
+                  posts[0]?.comments.map((comment: any) => (
+                    <Comment key={comment._id} data={comment} />
+                  ))
+                ) : (
+                  <p>No comments available.</p>
+                )}
 
               </div>
 

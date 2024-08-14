@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import React from 'react';
 import styles from "./comment.module.css";
-import Link from 'next/link';
 
-export default function Comment() {
+export default function Comment(data: any) {
+	const comment = data.data;
 	return (
 		<div className={`${styles.commentContainer} d-flex gap-3 mb-3`}>
 			<div>
@@ -15,9 +15,9 @@ export default function Comment() {
 				/>
 			</div>
 			<div>
-				<div className='mb-3 mt-3'>Wittawat98 <span className='text-muted'>12h ago</span></div>
+				<div className='mb-3 mt-3'>{comment?.user?.username || ''} <span className='text-muted'>{ comment.createdAt || ''}</span></div>
 				<div>
-					<p>Lorem ipsum dolor sit amet consectetur. Purus cursus vel est a pretium quam imperdiet. Tristique auctor sed semper nibh odio iaculis sed aliquet. Amet mollis eget morbi feugiat mi risus eu. Tortor sed sagittis convallis auctor.</p>
+					<p>{comment?.comment || ''}</p>
 				</div>
 			</div>
 		</div>
