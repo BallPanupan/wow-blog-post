@@ -43,9 +43,7 @@ cd your-repository-name
 
 ### 2. update .env file 
 ```bash
-JWT_SECRET=
-SERVER_PORT=
-MONGODB_URI=
+NEXT_PUBLIC_API_URL=http://localhost:3001
 ```
 
 
