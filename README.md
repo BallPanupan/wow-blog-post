@@ -25,7 +25,6 @@ Make sure you have the following installed on your machine:
 
 - Node.js (v18.19.0 or later)
 - npm (v9.6.0 or later) or yarn (v1.22.0 or later)
-- MongoDB (v7 or later)
 
 ## libraries or dependencies
 - bootstrap: "^5.3.3"
