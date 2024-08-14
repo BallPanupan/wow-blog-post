@@ -226,12 +226,12 @@ export default function post() {
                           <div>
                             <Image
                               src={'/icon/message-circle-02.svg'}
-                              alt='login board'
+                              alt='total comment'
                               width={30}
                               height={30}
                             />
                           </div>
-                          <div>{posts[0].comments.length || 0} Comments</div>
+                          <div>{!posts[0].comments._id ? posts[0].comments.length : 0 || 0} Comments</div>
                         </div>
                       </div>
                     )
@@ -245,13 +245,15 @@ export default function post() {
                 {!addCommentStatus ? <AddCommentBtn /> : <TextComment />}
 
 
-                {posts[0]?.comments.length > 1 ? (
-                  posts[0]?.comments.map((comment: any) => (
-                    <Comment key={comment._id} data={comment} />
-                  ))
-                ) : (
-                  <p>No comments available.</p>
-                )}
+                {
+                  posts[0]?.comments.length > 0 && posts[0]?.comments[0]._id ? (
+                    posts[0]?.comments.map((comment: any) => (
+                      <Comment key={comment._id} data={comment} />
+                    ))
+                  ) : (
+                    <p>No comments available.</p>
+                  )
+                }
 
               </div>
 

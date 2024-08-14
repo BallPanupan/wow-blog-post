@@ -142,7 +142,6 @@ export default function Post({content, profile, fetchPosts}: any) {
 
 		}
 	}
-
 	return (
 		<>
 			<ModalEditPost
@@ -151,13 +150,6 @@ export default function Post({content, profile, fetchPosts}: any) {
 				content={dataEditPost}
 				fetchPosts={fetchPosts}
 			/>
-
-
-
-
-
-
-
 
 			<ModalDeletePost
 				show={dataDeletePost}
@@ -209,14 +201,8 @@ export default function Post({content, profile, fetchPosts}: any) {
 							height={30}
 						/>
 					</div>
-					<div>32 Comments</div>
+					<div>{!content.comments[0]._id ? 0 : content.comments.length} Comments</div>
 				</div>
-				{/* <ModalDeletePost postId={content._id}/> */}
-				{/* <ModalEditePost newPost={newPost}
-					setNewPost={setNewPost}
-					communityList={communityList}
-					handleClick={handleClick}
-				/> */}
 			</div>
 		</>
 	);
