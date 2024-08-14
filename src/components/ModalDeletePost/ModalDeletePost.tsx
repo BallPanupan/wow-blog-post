@@ -10,7 +10,7 @@ const ModalDeletePost = ({ show, onClose, content, fetchPosts}: any) => {
 
   const handleDelete = async (content: any) => {
     try {
-      const response = await fetch(`http://localhost:3001/post/${content._id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${content._id}`, {
         method: "DELETE",
         headers: {
           'Content-Type': 'application/json',

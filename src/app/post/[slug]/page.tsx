@@ -42,7 +42,7 @@ export default function post() {
 
   const getPost = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/post?id=${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post?id=${id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ export default function post() {
 
   const fetchNewComment = async (postDetail: any, comment: any) => {
     try {
-      const response = await fetch(`http://localhost:3001/post/newComment?id=${postDetail._id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/newComment?id=${postDetail._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

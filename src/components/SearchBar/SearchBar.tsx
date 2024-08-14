@@ -46,7 +46,7 @@ export default function SearchBar({
 			}
 			if (!accessToken) throw new Error(`Please sign in to create a new post.`)
 			if (accessToken) {
-				const response = await fetch('http://localhost:3001/post', {
+				const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',

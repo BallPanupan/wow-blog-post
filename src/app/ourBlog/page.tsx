@@ -34,7 +34,7 @@ export default function Home() {
 
   const getAllPosts = async () => {
     try {
-      const response = await fetch('http://localhost:3001/post/mypost', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/mypost`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
