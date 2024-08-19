@@ -86,6 +86,8 @@ https://github.com/BallPanupan/wowBlogPost-backend
 
 
 # Then I will send The Assigned. 
+especially within the scope of the assignment that was completed in 5 days. 
+
 ### Here are all the feedback from datawow.io
 ```
 Thank you for taking the time to apply for the Fullstack Developer position at Data Wow. We appreciate your effort in completing the coding assessment and showcasing your skills.
